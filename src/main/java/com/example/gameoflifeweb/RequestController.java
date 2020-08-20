@@ -10,4 +10,9 @@ public class RequestController {
     public String gameOfLife() {
         return "game_of_life";
     }
+
+    @GetMapping("/test")
+    public String test() {
+        return "test";
+    }
 }
