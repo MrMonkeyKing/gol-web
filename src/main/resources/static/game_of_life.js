@@ -32,6 +32,20 @@ function buildGrid() {
             .map(() => Math.floor(Math.random() * 2)));
 }
 
+function render(grid) {
+    for(let col = 0; col < grid.length; col++) {
+        for(let row = 0; row < grid[col].length; row++) {
+            const cell = grid[col][row];
+
+            ctx.beginPath();
+            ctx.rect(row * resolution, col * resolution, resolution, resolution);
+            ctx.fillStyle = cell ? 'black' : canvas.background;
+            ctx.fill();
+            ctx.stroke();
+        }
+    }
+}
+
 function nextGen(grid) {
     const nextGen = grid.map(arr => [...arr])
     for(let col = 0; col < grid.length; col++) {
@@ -66,25 +80,11 @@ function nextGen(grid) {
     return nextGen;
 }
 
-function render(grid) {
-    for(let col = 0; col < grid.length; col++) {
-        for(let row = 0; row < grid[col].length; row++) {
-            const cell = grid[col][row];
-
-            ctx.beginPath();
-            ctx.rect(row * resolution, col * resolution, resolution, resolution);
-            ctx.fillStyle = cell ? 'black' : canvas.background;
-            ctx.fill();
-            ctx.stroke();
-        }
-    }
-}
-
-function update() {
+function updateGrid() {
     grid = nextGen(grid);
     render(grid);
     if(!stopped) {
-        requestAnimationFrame(update);
+        requestAnimationFrame(updateGrid);
     }
 }
 
@@ -93,7 +93,7 @@ function startStop() {
         stopped = true;
     } else {
         stopped = false;
-        requestAnimationFrame(update);
+        requestAnimationFrame(updateGrid);
     }
 }
 
