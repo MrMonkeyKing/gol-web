@@ -2,12 +2,22 @@
 const canvas = document.getElementById("gridCanvas")
 const ctx = canvas.getContext("2d");
 
-const resolution = 10;
 canvas.width = 800;
 canvas.height = 800;
+canvas.background = '#129DC5';
 
-const COLS = canvas.width / resolution;
-const ROWS = canvas.height / resolution;
+const slider = document.getElementById("resolutionSlider")
+const resOut = document.getElementById("resOut");
+const rowOut = document.getElementById("rowOut");
+const colOut = document.getElementById("colOut");
+
+let resolution = 10;
+let cols = canvas.width / resolution;
+let rows = canvas.height / resolution;
+
+resOut.innerHTML = resolution;
+colOut.innerHTML = cols;
+rowOut.innerHTML = rows;
 
 let stopped = true;
 
@@ -17,8 +27,8 @@ render(grid);
 
 //functions
 function buildGrid() {
-    return new Array(COLS).fill(null)
-        .map(() => new Array(ROWS).fill(null)
+    return new Array(cols).fill(null)
+        .map(() => new Array(rows).fill(null)
             .map(() => Math.floor(Math.random() * 2)));
 }
 
@@ -37,7 +47,7 @@ function nextGen(grid) {
                     const x_cell = col + i;
                     const y_cell = row + j;
 
-                    if (x_cell >= 0 && y_cell >= 0 && x_cell < COLS && y_cell < ROWS) {
+                    if (x_cell >= 0 && y_cell >= 0 && x_cell < cols && y_cell < rows) {
                         const currentNeighbour = grid[x_cell][y_cell];
                         numNeighbours += currentNeighbour;
                     }
@@ -63,7 +73,7 @@ function render(grid) {
 
             ctx.beginPath();
             ctx.rect(row * resolution, col * resolution, resolution, resolution);
-            ctx.fillStyle = cell ? 'black' : 'white';
+            ctx.fillStyle = cell ? 'black' : canvas.background;
             ctx.fill();
             ctx.stroke();
         }
@@ -90,4 +100,17 @@ function startStop() {
 function reset() {
     grid = buildGrid();
     render(grid);
+}
+
+slider.oninput = function () {
+    resolution = this.value;
+    cols = canvas.width / resolution;
+    rows = canvas.height / resolution;
+
+    grid = buildGrid();
+    render(grid);
+
+    resOut.innerHTML = resolution;
+    colOut.innerHTML = cols;
+    rowOut.innerHTML = rows;
 }

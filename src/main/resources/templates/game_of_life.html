@@ -6,15 +6,25 @@
     <title>Game of Life</title>
 </head>
 <body>
-<div class="item1">
-    <p id="paragraph1">I'm playing Game of Life</p>
-</div>
-<div class="item2">
-    <button id="startStopButton" onclick="startStop()">Start/Stop</button>
-    <button id="resetButton" onclick="reset()">Reset</button>
-</div>
-    <canvas class="item3" id="gridCanvas"></canvas>
+    <div id="heading">
+        <p id="logo">Game of Life</p>
+        <button id="startStopButton" onclick="startStop()">Start/Stop</button>
+        <button id="resetButton" onclick="reset()">Reset</button>
+    </div>
+    <div id="templateContainer">
+        <p>dummy template</p>
+    </div>
+    <div id="gridContainer">
+        <canvas id="gridCanvas"></canvas>
+    </div>
+    <div id="optionContainer">
+        <div id="slideContainer">
+            <p>Resolution slider</p>
+            <input type="range" min="10" max="100" value="10" class="slider" id="resolutionSlider">
+            <p>Resolution: <span id="resOut"></span> Columns: <span id="colOut"></span> Rows: <span id="rowOut"></span></p>
+        </div>
+    </div>
+    <div id="footer"></div>
     <script src="game_of_life.js"></script>
-    <div class="item4"></div>
 </body>
 </html>
