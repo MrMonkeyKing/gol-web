@@ -2,29 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="game_of_life.css">
+    <link rel="stylesheet" href="css/game_of_life.css">
     <title>Game of Life</title>
 </head>
 <body>
-    <div id="heading">
+    <!-- header -->
+    <header id="heading">
         <p id="logo">Game of Life</p>
         <button id="startStopButton" onclick="startStop()">Start/Stop</button>
         <button id="resetButton" onclick="reset()">Reset</button>
-    </div>
-    <div id="templateContainer">
+    </header>
+
+    <!-- left sidebar -->
+    <aside id="templateContainer">
         <p>dummy template</p>
-    </div>
-    <div id="gridContainer">
+    </aside>
+    
+    <!-- game of life canvas -->
+    <section id="gridContainer">
         <canvas id="gridCanvas"></canvas>
-    </div>
-    <div id="optionContainer">
+    </section>
+    
+    <!-- right sidebar -->
+    <aside id="optionContainer">
         <div id="slideContainer">
             <p>Resolution slider</p>
             <input type="range" min="10" max="100" value="10" class="slider" id="resolutionSlider">
             <p>Resolution: <span id="resOut"></span> Columns: <span id="colOut"></span> Rows: <span id="rowOut"></span></p>
         </div>
-    </div>
-    <div id="footer"></div>
-    <script src="game_of_life.js"></script>
+    </aside>
+
+    <!-- footer -->
+    <footer id="footer"></footer>
+    <script src="lib/game_of_life.js"></script>
 </body>
 </html>
